@@ -15,7 +15,7 @@ public class LoginController
     public String getLoginForm()
     {
         // zwroc nazwe strony html
-        return "login";
+        return "index";
     }
 
     // Sprawdzenie zgodnosci podanych danych
@@ -26,12 +26,17 @@ public class LoginController
 
         if("admin".equals(username) && "admin".equals(password)){
             // jesli login i haslo sa poprawne zwrocimy strone po zalogowaniu
-            return "home";
+            return "administrator";
+        }
+
+        if("policjant".equals(username) && "policjant".equals(password)){
+            // jesli login i haslo sa poprawne zwrocimy strone po zalogowaniu
+            return "policjant";
         }
 
         // jesli login i haslo sa niepoprawne zwrocimy strone logowania jeszcze raz
         model.addAttribute("invalidCredentials",true);
-        return "login";
+        return "index";
 
     }
 }

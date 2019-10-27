@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Index Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Logowanie do systemu zarządzania policją</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
 </head>
 <body>
-<h1> Welcome </h1>
-<a th:href="@{/login}">Zaloguj sie</a>
+    <div class="container">
+        <h2 class="text-center form-signin-heading">System Zarządzania Policją - Logowanie </h2>
+        <form class="form-signin" th:action="@{/login}" th:object="${loginForm}" method="post">
+
+            <label for="username" class="sr-only">Login</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Nazwa użytkownika" autofocus="autofocus">
+
+            <label for="password" class="sr-only">Hasło </label>
+            <input type="password" id="password" name="password" placeholder="Hasło" class="form-control">
+            <br/>
+                <p th:if="${invalidCredentials}" class="error alert alert-warning">Podany login lub hasło są niepoprawne</p>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj sie</button>
+        </form>
 </body>
 </html>
+
+
