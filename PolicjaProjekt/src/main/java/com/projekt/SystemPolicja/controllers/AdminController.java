@@ -33,7 +33,7 @@ public class AdminController {
     }
 
     @RequestMapping(value="/dodajPolicjanta", method=RequestMethod.POST)
-    public String dodajPalicjanta(@ModelAttribute(name="addPoliceman") User policjant, Model model)
+    public String dodajPolicjanta(@ModelAttribute(name="addPoliceman") User policjant, Model model)
     {
         Connection connection = getConnectionToDB();
         int id = policjant.getId();
@@ -48,6 +48,58 @@ public class AdminController {
         model.addAttribute("dodanoPolicjanta",true);
         return "dodajPolicjanta";
     }
+
+    @RequestMapping(value="/znajdzPolicjanta", method= RequestMethod.GET)
+    public String getSearchPolicemanForm()
+    {
+        // zwroc nazwe strony html
+        return "znajdzPolicjanta";
+    }
+
+    @RequestMapping(value="/znajdzPolicjanta", method=RequestMethod.POST)
+    public String znajdzPolicjanta(@ModelAttribute(name="findPoliceman") User policjant, Model model)
+    {
+        Connection connection = getConnectionToDB();
+        int id = policjant.getId();
+        ArrayList<User> usersList = new ArrayList<>();
+        usersList = findPoliceman(connection, id);
+        if(usersList.isEmpty())
+        {
+            model.addAttribute("nieznalezionoPolicjanta", true);
+        }
+        else{
+            model.addAttribute("znalezionoPolicjanta", true);
+        }
+        model.addAttribute("UsersList", usersList);
+
+        return "znajdzPolicjanta";
+    }
+
+
+    public ArrayList<User> findPoliceman(Connection conn, int id)
+    {
+        Statement stmt = null;
+        ArrayList<User> usersList = new ArrayList<>();
+        String query = "SELECT * FROM POLICJA.dbo.SYSTEM_USERS WHERE id=\'"+id+"\'";
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            User user;
+            while(rs.next()){
+                user=new User(rs.getInt("id"), rs.getString("login"), rs.getString("haslo"), rs.getString("imie"),
+                        rs.getString("nazwisko"), rs.getString("pesel"), rs.getString("telefon"));
+                usersList.add(user);
+            }
+            return usersList;
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+            return usersList;
+        }
+    }
+
+
+
 
     public void addPoliceman(Connection conn, String login, String haslo, String imie, String nazwisko, String pesel, String telefon)
     {
