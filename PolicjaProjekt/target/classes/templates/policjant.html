@@ -14,10 +14,14 @@
     <h2 class="text-center form-signin-heading">Panel Policjanta </h2>
     <div class="row">
         <div class="col-sm-4">
-            <a href="#" class="btn btn-lg btn-primary btn-block">Dodaj sprawę</a>
+            <form class="logout" th:action="@{/dodajSprawe}" method="get">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj sprawę</button>
+            </form>
         </div>
         <div class="col-sm-4">
-            <a href="#" class="btn btn-lg btn-primary btn-block">Wystaw mandat</a>
+            <form class="logout" th:action="@{/dodajMandat}" method="get">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Wystaw mandat</button>
+            </form>
         </div>
         <div class="col-sm-4">
             <form class="logout" th:action="@{/sprawy}" method="post">
