@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Panel policjanta</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center form-signin-heading">Panel Policjanta </h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Dodaj sprawę</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Wystaw mandat</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Pokaż wszystkie sprawy</a>
+        </div>
+    </div>
+    <div style="margin-top: 10px" class="row">
+        <div class="col-sm-3">
+            <form class="logout" th:action="@{/mandaty}" method="post">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Pokaż wszystkie mandaty</button>
+            </form>
+        </div>
+        <div class="col-sm-3">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj sprawę</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj mandat</a>
+        </div>
+        <div class="col-sm-3">
+            <form class="logout" th:action="@{/login}" method="post">
+                <button class="btn btn-lg btn-danger btn-block" type="submit">Wyloguj się</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Mandaty w systemie</h1>
+            <table style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
+                        -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
+                <tr>
+                    <th>Id</th>
+                    <th>Data</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Opis</th>
+                    <th>Kwota</th>
+                    <th>Pesel</th>
+                    <th>Adres</th>
+                </tr>
+
+
+                <tr th:each="mandate: ${MandateList}">
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getId()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getDate()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getImie()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getNazwisko()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getOpis()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getKwota()}"> zł</td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getPesel()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getAdres()}"></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

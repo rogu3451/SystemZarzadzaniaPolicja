@@ -35,7 +35,7 @@
             <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj sprawę</a>
         </div>
         <div class="col-sm-3">
-             <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj mandat</a>
+            <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj mandat</a>
         </div>
         <div class="col-sm-3">
             <form class="logout" th:action="@{/login}" method="post">
@@ -43,5 +43,35 @@
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Sprawy w systemie</h1>
+            <table style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
+                        -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
+                <tr>
+                    <th>Id</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Opis</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Pesel</th>
+                </tr>
+
+
+                <tr th:each="case: ${CaseList}">
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getId()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getDate()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getStatus()}"> zł</td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getImie()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getNazwisko()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getOpis()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getPesel()}"></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

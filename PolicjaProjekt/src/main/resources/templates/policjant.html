@@ -12,16 +12,36 @@
 <body>
 <div class="container">
     <h2 class="text-center form-signin-heading">Panel Policjanta </h2>
-    <a href="#" class="btn btn-lg btn-primary btn-block">Dodaj sprawę</a>
-    <a href="#" class="btn btn-lg btn-primary btn-block">Wystaw mandat</a>
-    <a href="#" class="btn btn-lg btn-primary btn-block">Pokaż wszystkie sprawy</a>
-    <a href="#" class="btn btn-lg btn-primary btn-block">Pokaż wszystkie mandaty</a>
-    <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj sprawę</a>
-    <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj mandat</a>
-
-    <p></p>
-    <form class="logout" th:action="@{/login}" method="post">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Wyloguj się</button>
-    </form>
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Dodaj sprawę</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Wystaw mandat</a>
+        </div>
+        <div class="col-sm-4">
+            <form class="logout" th:action="@{/sprawy}" method="post">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Pokaż wszystkie sprawy</button>
+            </form>
+        </div>
+    </div>
+    <div style="margin-top: 10px" class="row">
+        <div class="col-sm-3">
+            <form class="logout" th:action="@{/mandaty}" method="post">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Pokaż wszystkie mandaty</button>
+            </form>
+        </div>
+        <div class="col-sm-3">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj sprawę</a>
+        </div>
+        <div class="col-sm-3">
+             <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj mandat</a>
+        </div>
+        <div class="col-sm-3">
+            <form class="logout" th:action="@{/login}" method="post">
+                <button class="btn btn-lg btn-danger btn-block" type="submit">Wyloguj się</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
