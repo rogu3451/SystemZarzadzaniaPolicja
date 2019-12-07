@@ -14,7 +14,9 @@
     <h2 class="text-center form-signin-heading">Panel Administratora </h2>
     <div class="row">
         <div class="col-sm-3">
-            <a href="#" class="btn btn-lg btn-primary btn-block">Dodaj policjanta</a>
+            <form class="logout" th:action="@{/dodajPolicjanta}" method="get">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Dodaj policjanta</button>
+            </form>
         </div>
         <div class="col-sm-3">
             <a href="#" class="btn btn-lg btn-primary btn-block">Znajdź policjanta</a>

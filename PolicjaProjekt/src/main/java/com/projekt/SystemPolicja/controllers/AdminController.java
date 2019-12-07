@@ -3,7 +3,10 @@ package com.projekt.SystemPolicja.controllers;
 import com.projekt.SystemPolicja.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -21,6 +24,62 @@ public class AdminController {
         model.addAttribute("UsersList", usersList);
         return "showpolicemans";
     }
+
+    @RequestMapping(value="/dodajPolicjanta", method= RequestMethod.GET)
+    public String getPolicemanForm()
+    {
+        // zwroc nazwe strony html
+        return "dodajPolicjanta";
+    }
+
+    @RequestMapping(value="/dodajPolicjanta", method=RequestMethod.POST)
+    public String dodajPalicjanta(@ModelAttribute(name="addPoliceman") User policjant, Model model)
+    {
+        Connection connection = getConnectionToDB();
+        int id = policjant.getId();
+        String login =  policjant.getLogin();
+        String haslo =  policjant.getHaslo();
+        String imie =  policjant.getImie();
+        String nazwisko =  policjant.getNazwisko();
+        String pesel =  policjant.getPesel();
+        String telefon =  policjant.getTelefon();
+
+        addPoliceman(connection, login, haslo, imie, nazwisko, pesel, telefon);
+        model.addAttribute("dodanoPolicjanta",true);
+        return "dodajPolicjanta";
+    }
+
+    public void addPoliceman(Connection conn, String login, String haslo, String imie, String nazwisko, String pesel, String telefon)
+    {
+        String query = "INSERT INTO POLICJA.dbo.SYSTEM_USERS(login, haslo, imie, nazwisko, pesel, telefon) VALUES(?,?,?,?,?,?);";
+        try {
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, login);
+            pst.setString(2, haslo);
+            pst.setString(3, imie);
+            pst.setString(4, nazwisko);
+            pst.setString(5, pesel);
+            pst.setString(6, telefon);
+            pst.executeUpdate();
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public ArrayList<User> GetAllPolicemans(Connection conn)
     {
