@@ -1,24 +1,45 @@
 package com.projekt.SystemPolicja;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private String login, haslo, imie, nazwisko, pesel, telefon;
 
-    private String name;
-    private String surname;
-    private int pesel;
+    public User(int id, String login, String haslo, String imie, String nazwisko, String pesel, String telefon) {
+        this.id = id;
+        this.login = login;
+        this.haslo = haslo;
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.pesel = pesel;
+        this.telefon = telefon;
+    }
 
-    public User()
-    {
+    public int getId() {
+        return id;
+    }
 
+    public String getLogin(){
+        return login;
+    }
+
+    public String getHaslo(){
+        return haslo;
+    }
+
+    public String getImie(){
+        return imie;
+    }
+
+    public String getNazwisko(){
+        return nazwisko;
+    }
+
+    public String getPesel(){
+        return pesel;
+    }
+
+    public String getTelefon(){
+        return telefon;
     }
 
 }

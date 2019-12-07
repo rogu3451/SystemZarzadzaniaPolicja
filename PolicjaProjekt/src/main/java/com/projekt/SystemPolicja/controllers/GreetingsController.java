@@ -28,7 +28,7 @@ public class GreetingsController {
     public String GetGreeting(Connection conn)
     {
         Statement stmt = null;
-        String query = "SELECT TOP 1 imie FROM PROJEKT_SIEC_APTEK.dbo.[APTEKA.LEKARZ]";
+        String query = "SELECT TOP 1 imie FROM POLICJA.dbo.SYSTEM_USERS;";
         try
         {
             stmt = conn.createStatement();

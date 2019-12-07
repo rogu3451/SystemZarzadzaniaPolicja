@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Panel Administratora</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Panel administratora</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
 </head>
 <body>
-    <h1>Witaj w panelu administratora</h1>
+<div class="container">
+    <h2 class="text-center form-signin-heading">Panel Administratora </h2>
+    <div class="row">
+         <div class="col-sm-3">
+            <a href="#" class="btn btn-lg btn-primary btn-block">Dodaj policjanta</a>
+         </div>
+         <div class="col-sm-3">
+             <a href="showpolicemans" class="btn btn-lg btn-primary btn-block">Znajdź policjanta</a>
+         </div>
+
+         <div class="col-sm-3">
+            <form class="logout" th:action="@{/showpolicemans}" method="post">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Pokaż policjantów</button>
+            </form>
+         </div>
+          <div class="col-sm-3">
+              <form class="logout" th:action="@{/login}" method="post">
+                <button class="btn btn-lg btn-danger btn-block" type="submit">Wyloguj się</button>
+              </form>
+          </div>
+    </div>
+</div>
 </body>
 </html>
