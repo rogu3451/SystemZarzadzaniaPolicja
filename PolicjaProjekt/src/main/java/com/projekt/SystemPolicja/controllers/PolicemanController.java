@@ -130,6 +130,7 @@ public class PolicemanController {
 
         Connection connection = getConnectionToDB();
         int id = sprawa.getId();
+        System.out.println(id);
         ArrayList<Sprawa> caseList = new ArrayList<>();
         caseList = findCase(connection, id);
         if(caseList.isEmpty())

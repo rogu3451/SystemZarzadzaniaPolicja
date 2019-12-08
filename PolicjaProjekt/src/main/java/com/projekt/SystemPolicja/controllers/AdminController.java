@@ -120,19 +120,6 @@ public class AdminController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public ArrayList<User> GetAllPolicemans(Connection conn)
     {
         ArrayList<User> usersList = new ArrayList<>();
