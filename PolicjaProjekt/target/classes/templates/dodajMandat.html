@@ -59,25 +59,26 @@
                         -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
 
                 <form style="text-align: center;" th:action="@{/dodajMandat}" th:object="${addMandate}" method="post">
-                    <input type="hidden" id="id" name="id" value="1000"><br>
+                    <input required type="hidden" id="id" name="id" value="1000"><br>
                     Data wystawienia mandatu:<br>
-                    <input type="text" id="date" name="date"><br>
+                    <input required type="text" id="date" name="date" placeholder="data"><br>
                     Imię osoby przyjmującej mandat:<br>
-                    <input type="text" id="imie" name="imie"><br>
+                    <input required type="text" id="imie" name="imie" placeholder="imie"><br>
                     Nazwisko osoby przyjmującej mandat:<br>
-                    <input type="text" id="nazwisko" name="nazwisko"><br>
+                    <input required type="text" id="nazwisko" name="nazwisko" placeholder="nazwisko"><br>
                     Powód wystawienia mandatu:<br>
-                    <input type="text" id="opis" name="opis"><br>
+                    <input required type="text" id="opis" name="opis" placeholder="powód"><br>
                     Kwota mandatu (zł):<br>
-                    <input type="text" id="kwota" name="kwota"><br>
+                    <input required type="number" id="kwota"  step="0.01" name="kwota" placeholder="kwota"><br>
                     Pesel osoby przyjmującej mandat:<br>
-                    <input type="text" id="pesel" name="pesel"><br>
+                    <input required type="number" maxlength="12" title="Pesel musi mieć 11 znaków" id="pesel" name="pesel" placeholder="pesel" ><br>
                     Adres osoby przyjmującej mandat:<br>
-                    <input type="text" id="adres" name="adres"><br>
+                    <input required type="text" id="adres" name="adres" placeholder="adres"><br>
                     <br>
                     <button class="btn btn-lg btn-danger btn-block" type="submit">Wystaw mandat na tą osobę</button>
                 </form>
                 <p th:if="${dodanoMandat}" class="alert alert-warning">Mandat został pomyślnie wystawiony</p>
+                <p th:if="${puste_pole}" class="alert alert-warning">Wypełnij wszystkie pola</p>
             </div>
         </div>
         <div class="col-sm-4"></div>

@@ -45,7 +45,7 @@
 
                 <form style="text-align: center;" th:action="@{/znajdzPolicjanta}" th:object="${findPoliceman}" method="post">
                     <br>ID:<br>
-                         <input type="text" id="id" name="id" placeholder="Wprowadź id policjanta"><br>
+                         <input type="number" id="id" name="id" required placeholder="Wprowadź id policjanta"><br>
                     <br>
                     <button class="btn btn-lg btn-danger btn-block" type="submit">Wyszukaj</button>
                 </form>

@@ -61,19 +61,20 @@
                 <form style="text-align: center;" th:action="@{/dodajSprawe}" th:object="${addCase}" method="post">
                     <input type="hidden" id="id" name="id" value="1000"><br>
                     Data sprawy:<br>
-                    <input type="text" id="date" name="date"><br>
+                    <input required type="text" id="date" name="date" placeholder="data"><br>
                     Status sprawy:<br>
-                    <input type="text" id="status" name="status"><br>
+                    <input required type="text" id="status" name="status" placeholder="status"><br>
                     Opis zgłaszanej sprawy:<br>
-                    <input type="text" id="opis" name="opis"><br>
+                    <input required type="text" id="opis" name="opis" placeholder="opis"><br>
                     Imię osoby zgłaszającej:<br>
-                    <input type="text" id="imie" name="imie"><br>
+                    <input required type="text" id="imie" name="imie" placeholder="imie"><br>
                     Nazwisko osoby zgłaszającej:<br>
-                    <input type="text" id="nazwisko" name="nazwisko"><br>
+                    <input required type="text" id="nazwisko" name="nazwisko" placeholder="nazwisko"><br>
                     Pesel osoby zgłaszającej:<br>
-                    <input type="text" id="pesel" name="pesel"><br><br>
+                    <input required type="text" id="pesel" name="pesel" placeholder="pesel"><br><br>
                     <button class="btn btn-lg btn-danger btn-block" type="submit">Dodaj sprawę do systemu</button>
                 </form>
+                <p th:if="${puste_pole}" class="alert alert-warning">Wypełnij wszystkie pola</p>
                 <p th:if="${dodanoSprawe}" class="alert alert-warning">Sprawa została pomyślnie dodana</p>
             </div>
         </div>

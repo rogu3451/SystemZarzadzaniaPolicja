@@ -11,6 +11,8 @@ import java.sql.*;
 
 import java.util.ArrayList;
 
+import static java.sql.Types.NULL;
+
 
 @Controller
 public class AdminController {
@@ -44,6 +46,14 @@ public class AdminController {
         String pesel =  policjant.getPesel();
         String telefon =  policjant.getTelefon();
 
+        // Walidacja
+        if((login.isEmpty()) || (imie.isEmpty()) || (nazwisko.isEmpty()) || (haslo.isEmpty()) || (telefon.isEmpty()) || (pesel.isEmpty()))
+        {
+            model.addAttribute("puste_pole",true);
+            return "dodajPolicjanta";
+        }
+
+
         addPoliceman(connection, login, haslo, imie, nazwisko, pesel, telefon);
         model.addAttribute("dodanoPolicjanta",true);
         return "dodajPolicjanta";
@@ -61,6 +71,7 @@ public class AdminController {
     {
         Connection connection = getConnectionToDB();
         int id = policjant.getId();
+
         ArrayList<User> usersList = new ArrayList<>();
         usersList = findPoliceman(connection, id);
         if(usersList.isEmpty())

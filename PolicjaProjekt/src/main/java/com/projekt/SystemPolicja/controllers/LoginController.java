@@ -31,28 +31,28 @@ public class LoginController
 
     // Sprawdzenie zgodnosci podanych danych
     @RequestMapping(value="/login", method=RequestMethod.POST)
-    public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model){
-        String username = loginForm.getUsername();
-        String password = loginForm.getPassword();
+public String login(@ModelAttribute(name="loginForm") LoginForm loginForm, Model model){
+    String username = loginForm.getUsername();
+    String password = loginForm.getPassword();
 
-        if("admin".equals(username) && "admin".equals(password)){
-            // jesli login i haslo sa poprawne zwrocimy strone po zalogowaniu
-            return "administrator";
-        }
-        Connection connection = getConnectionToDB();
-        ArrayList<User> usersList = GetAllPolicemans(connection);
-        for(User user : usersList) {
-            if (user.getLogin().equals(username) && user.getHaslo().equals(password)) {
-                // jesli login i haslo sa poprawne zwrocimy strone po zalogowaniu
-                return "policjant";
-            }
-        }
-
-        // jesli login i haslo sa niepoprawne zwrocimy strone logowania jeszcze raz
-        model.addAttribute("invalidCredentials",true);
-        return "index";
-
+    if("admin".equals(username) && "admin".equals(password)){
+        // jesli login i haslo sa poprawne zwrocimy strone po zalogowaniu
+        return "administrator";
     }
+    Connection connection = getConnectionToDB();
+    ArrayList<User> usersList = GetAllPolicemans(connection);
+    for(User user : usersList) {
+        if (user.getLogin().equals(username) && user.getHaslo().equals(password)) {
+            // jesli login i haslo sa poprawne zwrocimy strone po zalogowaniu
+            return "policjant";
+        }
+    }
+
+    // jesli login i haslo sa niepoprawne zwrocimy strone logowania jeszcze raz
+    model.addAttribute("invalidCredentials",true);
+    return "index";
+
+}
 
     public ArrayList<User> GetAllPolicemans(Connection conn)
     {

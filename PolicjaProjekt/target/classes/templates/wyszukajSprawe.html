@@ -60,7 +60,7 @@
 
                 <form style="text-align: center;" th:action="@{/wyszukajSprawe}" th:object="${findCase}" method="post">
                     <br>ID:<br>
-                        <input type="text" id="id" name="id" placeholder="Wprowadź id sprawy"><br>
+                        <input required type="number" id="id" name="id" placeholder="Wprowadź id sprawy"><br>
                     <br>
                     <button class="btn btn-lg btn-danger btn-block" type="submit">Wyszukaj</button>
                 </form>

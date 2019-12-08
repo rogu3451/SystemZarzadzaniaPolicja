@@ -44,23 +44,24 @@
                         -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
 
                 <form style="text-align: center;" th:action="@{/dodajPolicjanta}" th:object="${addPoliceman}" method="post">
-                    <input type="hidden" id="id" name="id" value="1000"><br>
+                    <input required type="hidden" id="id" name="id" value="1000"><br>
                     Ustaw login:<br>
-                    <input type="text" id="login" name="login"><br>
+                    <input required type="text" id="login" name="login" placeholder="login"><br>
                     Ustaw haslo:<br>
-                    <input type="password" id="haslo" name="haslo"><br>
+                    <input required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Musi zawierać małe i duże litery oraz minimum 8 znaków"id="haslo" name="haslo" placeholder="hasło"><br>
                     Imie policjanta:<br>
-                    <input type="text" id="imie" name="imie"><br>
+                    <input required type="text" id="imie" name="imie" placeholder="imie"><br>
                     Nazwisko policjanta:<br>
-                    <input type="text" id="nazwisko" name="nazwisko"><br>
+                    <input required type="text" id="nazwisko" name="nazwisko" placeholder="nazwisko" ><br>
                     Pesel policjanta:<br>
-                    <input type="text" id="pesel" name="pesel">
+                    <input required type="number" id="pesel" name="pesel" placeholder="pesel" maxlength="12" title="Pesel musi mieć 11 znaków">
                     <br>
                     Telefon policjanta:<br>
-                    <input type="text" id="telefon" name="telefon"><br>
+                    <input required type="number" id="telefon" name="telefon" placeholder="telefon"><br>
                     <br><br>
                     <button class="btn btn-lg btn-danger btn-block" type="submit">Dodaj policjanta do systemu</button>
                 </form>
+                <p th:if="${puste_pole}" class="alert alert-warning">Wypełnij wszystkie pola</p>
                 <p th:if="${dodanoPolicjanta}" class="alert alert-warning">Policjant został pomyślnie dodany</p>
         </div>
         </div>

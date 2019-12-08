@@ -13,6 +13,8 @@ import java.sql.*;
 
 import java.util.ArrayList;
 
+import static ch.qos.logback.core.joran.action.ActionConst.NULL;
+
 
 @Controller
 public class PolicemanController {
@@ -61,6 +63,16 @@ public class PolicemanController {
         String imie = sprawa.getImie();
         String nazwisko = sprawa.getNazwisko();
         String pesel = sprawa.getPesel();
+
+
+        // Walidacja
+        if((data.isEmpty()) || (imie.isEmpty()) || (nazwisko.isEmpty()) || (opis.isEmpty()) || (status.isEmpty()) || (pesel.isEmpty()))
+        {
+            model.addAttribute("puste_pole",true);
+            return "dodajSprawe";
+        }
+
+
         addCase(connection, data, status, opis, imie, nazwisko, pesel);
         model.addAttribute("dodanoSprawe",true);
         return "dodajSprawe";
@@ -85,6 +97,13 @@ public class PolicemanController {
         String kwota =  mandat.getKwota();
         String pesel =  mandat.getPesel();
         String adres =  mandat.getAdres();
+
+        // Walidacja
+        if((data.isEmpty()) || (imie.isEmpty()) || (nazwisko.isEmpty()) || (opis.isEmpty()) || (kwota.isEmpty()) || (pesel.isEmpty()) || (adres.isEmpty()) )
+        {
+            model.addAttribute("puste_pole",true);
+            return "dodajMandat";
+        }
 
         addMandate(connection, data, imie, nazwisko, opis, kwota, pesel, adres);
         model.addAttribute("dodanoMandat",true);
