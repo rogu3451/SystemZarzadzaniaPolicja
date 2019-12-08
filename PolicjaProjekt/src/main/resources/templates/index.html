@@ -21,6 +21,7 @@
             <input type="password" id="password" name="password" placeholder="Hasło" class="form-control">
             <br/>
                 <p th:if="${invalidCredentials}" class="error alert alert-warning">Podany login lub hasło są niepoprawne</p>
+                <p th:if="${wylogowano}" class="alert alert-warning">Wylogowano</p>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj sie</button>
         </form>
 </body>

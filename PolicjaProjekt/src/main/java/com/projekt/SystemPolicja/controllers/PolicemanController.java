@@ -2,6 +2,7 @@ package com.projekt.SystemPolicja.controllers;
 
 import com.projekt.SystemPolicja.Mandat;
 import com.projekt.SystemPolicja.Sprawa;
+import com.projekt.SystemPolicja.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -88,6 +89,106 @@ public class PolicemanController {
         addMandate(connection, data, imie, nazwisko, opis, kwota, pesel, adres);
         model.addAttribute("dodanoMandat",true);
         return "dodajMandat";
+    }
+
+    @RequestMapping(value="/wyszukajMandat", method= RequestMethod.GET)
+    public String getSearchMandateForm()
+    {
+        // zwroc nazwe strony html
+        return "wyszukajMandat";
+    }
+
+    @RequestMapping(value="/wyszukajMandat", method=RequestMethod.POST)
+    public String wyszukajMandat(@ModelAttribute(name="findMandate") Mandat mandat, Model model)
+    {
+        Connection connection = getConnectionToDB();
+        int id = mandat.getId();
+        ArrayList<Mandat> mandateList = new ArrayList<>();
+        mandateList = findMandate(connection, id);
+        if(mandateList.isEmpty())
+        {
+            model.addAttribute("nieznalezionoMandatu", true);
+        }
+        else{
+            model.addAttribute("znalezionoMandat", true);
+        }
+        model.addAttribute("MandateList",mandateList);
+
+        return "wyszukajMandat";
+    }
+
+    @RequestMapping(value="/wyszukajSprawe", method= RequestMethod.GET)
+    public String getSearchCaseForm()
+    {
+        // zwroc nazwe strony html
+        return "wyszukajSprawe";
+    }
+
+    @RequestMapping(value="/wyszukajSprawe", method=RequestMethod.POST)
+    public String wyszukajSprawe(@ModelAttribute(name="findCase") Sprawa sprawa, Model model)
+    {
+
+        Connection connection = getConnectionToDB();
+        int id = sprawa.getId();
+        ArrayList<Sprawa> caseList = new ArrayList<>();
+        caseList = findCase(connection, id);
+        if(caseList.isEmpty())
+        {
+            model.addAttribute("nieznalezionoSprawy", true);
+        }
+        else{
+            model.addAttribute("znalezionoSprawe", true);
+        }
+        model.addAttribute("CaseList",caseList);
+
+        return "wyszukajSprawe";
+    }
+
+    public ArrayList<Sprawa> findCase(Connection conn, int id)
+    {
+        Statement stmt = null;
+        ArrayList<Sprawa> caseList = new ArrayList<>();
+        String query = "SELECT * FROM POLICJA.dbo.SPRAWA WHERE id=\'"+id+"\'";
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            Sprawa sprawa;
+            while(rs.next()){
+                sprawa=new Sprawa(rs.getInt("id"), rs.getString("data"), rs.getString("status"), rs.getString("opis"),
+                        rs.getString("imie"),  rs.getString("nazwisko"), rs.getString("pesel"));
+                caseList.add(sprawa);
+            }
+            return caseList;
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+            return caseList;
+        }
+    }
+
+
+
+
+    public ArrayList<Mandat> findMandate(Connection conn, int id)
+    {
+        Statement stmt = null;
+        ArrayList<Mandat> mandateList = new ArrayList<>();
+        String query = "SELECT * FROM POLICJA.dbo.MANDATE WHERE id=\'"+id+"\'";
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            Mandat mandat;
+            while(rs.next()){
+                mandat=new Mandat(rs.getInt("id"), rs.getString("data"), rs.getString("imie"),
+                        rs.getString("nazwisko"), rs.getString("opis"), rs.getString("kwota"), rs.getString("pesel"), rs.getString("adres"));
+                mandateList.add(mandat);
+            }
+            return mandateList;
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+            return mandateList;
+        }
     }
 
     public void addMandate(Connection conn, String data, String imie, String nazwisko, String opis, String kwota, String pesel, String adres)

@@ -12,8 +12,9 @@ public class LoginController
 {
     // Aby dostac formularz logowania ze strony
     @RequestMapping(value="/login", method= RequestMethod.GET)
-    public String getLoginForm()
+    public String getLoginForm(Model model)
     {
+        model.addAttribute("wylogowano",true);
         // zwroc nazwe strony html
         return "index";
     }

@@ -36,13 +36,17 @@
             </form>
         </div>
         <div class="col-sm-3">
-            <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj sprawę</a>
+            <form class="logout" th:action="@{/wyszukajSprawe}" method="get">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Wyszukaj sprawe</button>
+            </form>
         </div>
         <div class="col-sm-3">
-             <a href="#" class="btn btn-lg btn-primary btn-block">Wyszukaj mandat</a>
+            <form class="logout" th:action="@{/wyszukajMandat}" method="get">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Wyszukaj mandat</button>
+            </form>
         </div>
         <div class="col-sm-3">
-            <form class="logout" th:action="@{/login}" method="post">
+            <form class="logout" th:action="@{/login}" method="get">
                 <button class="btn btn-lg btn-danger btn-block" type="submit">Wyloguj się</button>
             </form>
         </div>

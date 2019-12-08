@@ -52,36 +52,54 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
-            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Mandaty w systemie</h1>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <h3 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Wyszukiwanie sprawy</h3>
+            <div style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
+                        -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
+
+                <form style="text-align: center;" th:action="@{/wyszukajSprawe}" th:object="${findCase}" method="post">
+                    <br>ID:<br>
+                        <input type="text" id="id" name="id" placeholder="Wprowadź id sprawy"><br>
+                    <br>
+                    <button class="btn btn-lg btn-danger btn-block" type="submit">Wyszukaj</button>
+                </form>
+                <p th:if="${znalezionoSprawe}" class="alert alert-warning">Sprawa została znaleziona</p>
+                <p th:if="${nieznalezionoSprawy}" class="alert alert-warning">Sprawa nie została znaleziona</p>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <div class="row">
+        <div th:if="${znalezionoSprawe}" class="col-sm-12">
+            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Sprawy w systemie</h1>
             <table style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
                         -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
                 <tr>
                     <th>Id</th>
                     <th>Data</th>
+                    <th>Status</th>
+                    <th>Opis</th>
                     <th>Imię</th>
                     <th>Nazwisko</th>
-                    <th>Opis</th>
-                    <th>Kwota</th>
                     <th>Pesel</th>
-                    <th>Adres</th>
                 </tr>
 
 
-                <tr th:each="mandate: ${MandateList}">
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getId()}"></td>
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getDate()}"></td>
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getImie()}"></td>
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getNazwisko()}"></td>
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getOpis()}"></td>
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getKwota()}"> zł</td>
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getPesel()}"></td>
-                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getAdres()}"></td>
+                <tr th:each="case: ${CaseList}">
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getId()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getDate()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getStatus()}"> zł</td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getImie()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getNazwisko()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getOpis()}"></td>
+                    <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${case.getPesel()}"></td>
                 </tr>
 
             </table>
         </div>
     </div>
-</div>
+
+
 </body>
 </html>
