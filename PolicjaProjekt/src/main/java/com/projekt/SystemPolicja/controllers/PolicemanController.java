@@ -117,6 +117,8 @@ public class PolicemanController {
         return "wyszukajMandat";
     }
 
+
+
     @RequestMapping(value="/wyszukajMandat", method=RequestMethod.POST)
     public String wyszukajMandat(@ModelAttribute(name="findMandate") Mandat mandat, Model model)
     {
@@ -136,6 +138,25 @@ public class PolicemanController {
         return "wyszukajMandat";
     }
 
+    @RequestMapping(value="/wyszukajMandatData", method=RequestMethod.POST)
+    public String wyszukajMandatData(@ModelAttribute(name="findMandateData") Mandat mandat, Model model)
+    {
+        Connection connection = getConnectionToDB();
+        String data = mandat.getDate();
+        ArrayList<Mandat> mandateList = new ArrayList<>();
+        mandateList = findMandateData(connection, data);
+        if(mandateList.isEmpty())
+        {
+            model.addAttribute("nieznalezionoMandatuData", true);
+        }
+        else{
+            model.addAttribute("znalezionoMandatData", true);
+        }
+        model.addAttribute("MandateList",mandateList);
+
+        return "wyszukajMandat";
+    }
+
     @RequestMapping(value="/wyszukajSprawe", method= RequestMethod.GET)
     public String getSearchCaseForm()
     {
@@ -149,7 +170,6 @@ public class PolicemanController {
 
         Connection connection = getConnectionToDB();
         int id = sprawa.getId();
-        System.out.println(id);
         ArrayList<Sprawa> caseList = new ArrayList<>();
         caseList = findCase(connection, id);
         if(caseList.isEmpty())
@@ -194,6 +214,28 @@ public class PolicemanController {
         Statement stmt = null;
         ArrayList<Mandat> mandateList = new ArrayList<>();
         String query = "SELECT * FROM POLICJA.dbo.MANDATE WHERE id=\'"+id+"\'";
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            Mandat mandat;
+            while(rs.next()){
+                mandat=new Mandat(rs.getInt("id"), rs.getString("data"), rs.getString("imie"),
+                        rs.getString("nazwisko"), rs.getString("opis"), rs.getString("kwota"), rs.getString("pesel"), rs.getString("adres"));
+                mandateList.add(mandat);
+            }
+            return mandateList;
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+            return mandateList;
+        }
+    }
+
+    public ArrayList<Mandat> findMandateData(Connection conn, String data)
+    {
+        Statement stmt = null;
+        ArrayList<Mandat> mandateList = new ArrayList<>();
+        String query = "SELECT * FROM POLICJA.dbo.MANDATE WHERE data=\'"+data+"\'";
         try {
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);

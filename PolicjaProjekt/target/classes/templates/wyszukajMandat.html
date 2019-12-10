@@ -51,10 +51,11 @@
             </form>
         </div>
     </div>
+    <h3 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Wyszukiwanie mandatu</h3>
     <div class="row">
-        <div class="col-sm-4"></div>
+        <div class="col-sm-2"></div>
         <div class="col-sm-4">
-            <h3 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Wyszukiwanie mandatu</h3>
+
             <div style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
                         -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
 
@@ -68,11 +69,57 @@
                 <p th:if="${nieznalezionoMandatu}" class="alert alert-warning">Mandat nie został znaleziony</p>
             </div>
         </div>
-        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+
+            <div style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
+                        -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
+                <form style="text-align: center;" th:action="@{/wyszukajMandatData}" th:object="${findMandateData}" method="post">
+                    <br>DATA:<br>
+                    (dd-mm-yyyy)<br>
+                    <input required type="hidden" id="id" name="id" value="-1">
+                    <input required type="text" id="date" name="date" placeholder="Wprowadź date"><br>
+                    <br>
+                    <button class="btn btn-lg btn-danger btn-block" type="submit">Wyszukaj</button>
+                </form>
+                <p th:if="${znalezionoMandatData}" class="alert alert-warning">Znalezione mandaty o tej dacie</p>
+                <p th:if="${nieznalezionoMandatuData}" class="alert alert-warning">Brak mandatów o tej dacie</p>
+            </div>
+
+        </div>
+        <div class="col-sm-2"></div>
     </div>
         <div class="row">
             <div  th:if="${znalezionoMandat}" class="col-sm-12">
-                <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Dane mandatu o podanym ID</h1>
+                <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Znalezione mandaty: </h1>
+                <table style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
+                        -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
+                    <tr>
+                        <th>Id</th>
+                        <th>Data</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>Opis</th>
+                        <th>Kwota</th>
+                        <th>Pesel</th>
+                        <th>Adres</th>
+                    </tr>
+
+
+                    <tr th:each="mandate: ${MandateList}">
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getId()}"></td>
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getDate()}"></td>
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getImie()}"></td>
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getNazwisko()}"></td>
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getOpis()}"></td>
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getKwota()}"> zł</td>
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getPesel()}"></td>
+                        <td style="border-bottom: 1px solid black; border-right: 1px dashed black" th:text="${mandate.getAdres()}"></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div  th:if="${znalezionoMandatData}" class="col-sm-12">
+                <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px;">Znalezione mandaty: </h1>
                 <table style="width:100%; background-color: #B7B7B7; -webkit-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);
                         -moz-box-shadow: 7px 24px 59px 10px rgba(0,0,0,1); box-shadow: 7px 24px 59px 10px rgba(0,0,0,1);">
                     <tr>
