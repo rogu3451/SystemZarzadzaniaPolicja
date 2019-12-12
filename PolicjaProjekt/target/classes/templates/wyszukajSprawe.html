@@ -66,6 +66,7 @@
                 </form>
                 <p th:if="${znalezionoSprawe}" class="alert alert-warning">Sprawa została znaleziona</p>
                 <p th:if="${nieznalezionoSprawy}" class="alert alert-warning">Sprawa nie została znaleziona</p>
+                <p th:if="${edytowanoSprawe}" class="alert alert-warning">Opis sprawy został pomyślnie edytowany</p>
             </div>
         </div>
         <div class="col-sm-4"></div>
@@ -79,9 +80,9 @@
                     <th>Id</th>
                     <th>Data</th>
                     <th>Status</th>
-                    <th>Opis</th>
                     <th>Imię</th>
                     <th>Nazwisko</th>
+                    <th>Opis</th>
                     <th>Pesel</th>
                 </tr>
 
@@ -97,9 +98,18 @@
                 </tr>
 
             </table>
+                    <div th:each="case2: ${CaseList}">
+                        <form style="text-align: center;" th:action="@{/edytujOpisSprawy}" th:object="${findCaseEdit}" method="post">
+                            <br><h3>Opis sprawy:</h3><br>
+                            <input required type="hidden" id="id" name="id" th:attr="value = ${case2.getId()}"><br>
+                            <textarea  required type="text"  id="opis" name="opis" rows="8" cols="140" th:text="${case2.getOpis()}"></textarea><br>
+                            <br>
+                            <button class="btn btn-lg btn-danger btn-block" type="submit">Edytuj opis sprawy</button>
+                        </form>
+                    </div>
         </div>
     </div>
 
-
+</div>
 </body>
 </html>

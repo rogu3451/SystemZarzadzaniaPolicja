@@ -184,6 +184,50 @@ public class PolicemanController {
         return "wyszukajSprawe";
     }
 
+    @RequestMapping(value="/edytujOpisSprawy", method=RequestMethod.POST)
+    public String edytujOpisSprawy(@ModelAttribute(name="findCaseEdit") Sprawa sprawa, Model model)
+    {
+
+        Connection connection = getConnectionToDB();
+        int id = sprawa.getId();
+        String opis = sprawa.getOpis();
+
+        ArrayList<Sprawa> caseList = new ArrayList<>();
+        caseList = editDecriptionOfCase(connection, id, opis);
+        model.addAttribute("edytowanoSprawe", true);
+
+        model.addAttribute("CaseList",caseList);
+
+        return "wyszukajSprawe";
+    }
+
+    public ArrayList<Sprawa> editDecriptionOfCase(Connection conn, int id, String opis)
+    {
+        Statement stmt = null;
+        ArrayList<Sprawa> caseList = new ArrayList<>();
+        String query = "UPDATE POLICJA.dbo.SPRAWA SET opis=\'"+opis+"\' WHERE id=\'"+id+"\'";
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            Sprawa sprawa;
+            while(rs.next()){
+                sprawa=new Sprawa(rs.getInt("id"), rs.getString("data"), rs.getString("status"), rs.getString("opis"),
+                        rs.getString("imie"),  rs.getString("nazwisko"), rs.getString("pesel"));
+                caseList.add(sprawa);
+            }
+            return caseList;
+        }
+        catch(SQLException e) {
+            System.out.println(e);
+            return caseList;
+        }
+    }
+
+
+
+
+
+
     public ArrayList<Sprawa> findCase(Connection conn, int id)
     {
         Statement stmt = null;
@@ -205,6 +249,8 @@ public class PolicemanController {
             return caseList;
         }
     }
+
+
 
 
 
