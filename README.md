@@ -1,7 +1,8 @@
 # SystemZarzadzaniaPolicja
-Projekt Systemu Zarzadzania Policja 
 
-Data wykonania: 20.02.2019
+## Projekt Systemu Zarzadzania Policja 
+
+## Data wykonania: 20.02.2019
 
 Prosty projekt do zarządzania systemem policji, tworzony na potrzeby zaliczenia oraz poznania podstaw frameworka Spring.
 Projekt zawiera podstawowe operacje CRUD, opiera się na bazie danych zaimplementowanej w Microsoft SQL Server bez użycia Hibernate.
